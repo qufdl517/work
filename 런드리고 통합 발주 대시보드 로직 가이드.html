@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!-- saved from url=(0110)file:///Users/eunbyeol/.gemini/antigravity/brain/d4578f74-be6e-4afa-9f42-f29309235c06/laundrygo_scm_guide.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>런드리고 통합 발주 대시보드 로직 가이드</title>
+    <!-- 폰트 적용 (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin="" href="./런드리고 통합 발주 대시보드 로직 가이드_files/pretendard.min.css">
+    <style>
+        :root {
+            --primary: #0F62FE;
+            --primary-light: #EDF5FF;
+            --text-main: #111827;
+            --text-sub: #4B5563;
+            --bg-body: #F3F4F6;
+            --bg-card: #FFFFFF;
+            --border: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            word-break: keep-all;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: #1F2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .desc {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .principle-box {
+            background-color: #F8FAFC;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .principle-box h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .principle-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .principle-box li {
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        .principle-box p {
+            margin: 0;
+            color: #374151;
+        }
+
+        .badge {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        strong {
+            color: var(--text-main);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>런드리고 통합 발주 대시보드</h1>
+        <p>핵심 5대 로직(AI) 동작 원리 가이드북</p>
+        <p style="font-size: 0.95rem; margin-top:10px;">이 문서는 런드리고 발주 대시보드의 심장 역할을 하는 <strong>5개의 핵심 자동화 로직</strong>이 백단에서 '어떤 비즈니스적 판단'을 거쳐 결과를 내놓는지, 그 작동 원리와 철학을 실무자 관점에서 알기 쉽게 설명합니다.</p>
+    </div>
+
+    <!-- 1번 로직 -->
+    <div class="card">
+        <h2><span class="badge">Column R</span> 🔮 발주시점수식 (사전 예측 방어 로직)</h2>
+        <div class="desc">
+            데이터에 기반하여 스스로 발주 기준점(마지노선)을 정합니다.
+        </div>
+        <div class="principle-box">
+            <h3>💡 동작 원리 (MAX 방어 전략)</h3>
+            <p>시스템은 매일 발주 기준점을 계산할 때 두 가지 데이터를 도마 위에 올립니다.</p>
+            <ul style="margin-top: 10px; margin-bottom: 16px;">
+                <li><strong>최근의 현실:</strong> 최근 한 달, 두 달, 세 달 동안의 평균 소비 속도</li>
+                <li><strong>다가올 미래:</strong> 정확히 1년 전, '다음 달'에 소비했던 기록 (시즌성)</li>
+            </ul>
+            <p>시스템은 이 4가지 숫자 중 <strong>가장 크고 보수적인(빡센) 숫자</strong>를 기준 일평균으로 채택합니다. 성수기가 다가오면 작년 기록을 바탕으로 알아서 발주 기준을 뻥튀기하여 결품을 완벽히 방어하고, 비수기에는 최근의 얌전한 추세를 따라가서 악성 재고가 쌓이는 것을 막아줍니다. 여기에 물건이 오는 기간(리드타임)과 20%의 안전재고 버퍼를 곱해 최종 마지노선을 결정합니다.</p>
+        </div>
+    </div>
+
+    <!-- 2번 로직 -->
+    <div class="card">
+        <h2><span class="badge">Column S</span> 🚦 발주 긴급도 (4단계 신호등 로직)</h2>
+        <div class="desc">
+            단순히 "지금 우리 창고에 재고가 비었는가?"를 넘어, "오고 있는 물건"과 "다가올 성수기"까지 종합적으로 판단해 실무자에게 명확한 행동 지침을 내립니다.
+        </div>
+        <div class="principle-box">
+            <h3>💡 동작 원리 (Net Inventory 기반 판단)</h3>
+            <p style="margin-bottom: 12px;">창고의 실재고에 이미 발주를 넣어 배송 중인 수량(입고예정)을 합친 <strong>'총 가용재고'</strong>를 기준으로 마지노선과 비교합니다.</p>
+            <ul>
+                <li>마지노선 밑으로 뚫렸는데, 창고로 오고 있는 물건조차 없다면 👉 <strong>"🔴 발주 필요 (재고 부족)"</strong></li>
+                <li>마지노선 밑으로 뚫렸는데, 수요 예측 로직이 다음 달 '성수기 급증'을 감지했다면 👉 <strong>"🔴 발주 필요 (시즌 대비)"</strong> (평소보다 왕창 시켜야 함을 암시)</li>
+                <li>마지노선 밑으로 뚫렸지만, 다행히 물건이 오고 있다면 👉 <strong>"🟡 추가 발주 필요"</strong></li>
+                <li>마지노선을 훌쩍 넘겼고 평화롭다면 👉 <strong>"🟢 정상"</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3번 로직 -->
+    <div class="card">
+        <h2><span class="badge">Column W</span> 🚨 시즌성 알림 (수요 급증 경보기)</h2>
+        <div class="desc">
+            발주시점(1번 로직)이 백단에서 알아서 성수기 발주량을 계산해 주지만, 담당자도 직관적으로 "아, 이 품목이 다음 달에 수요가 증가하겠구나"라고 눈치챌 수 있게 돕는 조기 경보 시스템입니다.
+        </div>
+        <div class="principle-box">
+            <h3>💡 동작 원리 (20% 초과 급증 스캐너)</h3>
+            <p>시스템이 현재의 일평균 소비 속도와 작년 다음 달의 소비 속도를 비교합니다. 만약 다가올 다음 달의 수요가 지금보다 <strong>최소 20% 이상 폭발적으로 증가</strong>할 것이라 예상될 때만 사이렌(<code>🚨 다음달 급증 예상 +%</code>)을 울립니다. 반대로 평달이거나 수요가 줄어드는 달, 혹은 데이터가 없는 신규 자재는 모두 "🟢 특이사항 없음"으로 묶어버려 불필요한 알람을 차단합니다.</p>
+        </div>
+    </div>
+
+    <!-- 4번 로직 -->
+    <div class="card">
+        <h2><span class="badge">Column T</span> 📦 발주 필요 낱개 수량 (박스/MOQ 보정 로직)</h2>
+        <div class="desc">
+            순수하게 '모자란 개수'를 그대로 발주서에 적었다가 공급업체로부터 발주가 반려되는 실무적인 사고를 원천 차단합니다.
+        </div>
+        <div class="principle-box">
+            <h3>💡 동작 원리 (이중 방어막)</h3>
+            <ul>
+                <li style="margin-bottom: 12px;"><strong>박스 규격화:</strong> 만약 계산상 32개가 부족하다고 나오더라도, 공급업체가 한 박스에 10개씩 담아 판다면 시스템은 알아서 40개(4박스 분량)로 넉넉하게 <strong>올림 처리</strong>를 해버립니다.</li>
+                <li><strong>MOQ(최소발주수량) 방어:</strong> 그렇게 박스 단위로 맞춘 숫자가 만약 공급업체의 "최소 50개 이상 주문" 조건(MOQ)에 미달한다면? 시스템은 부족한 숫자를 강제로 MOQ(50개)까지 끌어올려 발주 가능한 수량으로 만들어냅니다.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 5번 로직 -->
+    <div class="card">
+        <h2><span class="badge">Column U</span> 🏗️ 발주 필요 박스 수량 (PLT 최적화 로직)</h2>
+        <div class="desc">
+            물류 작업 효율을 극대화하기 위해 발주량을 최종적으로 한 번 더 파레트 단위 수량에 맞춥니다.
+        </div>
+        <div class="principle-box">
+            <h3>💡 동작 원리 (꽉 찬 1파레트)</h3>
+            <p>앞선 로직(4번)에서 구한 수량을 기준으로 파레트 몇 개 분량이 나오는지 계산합니다. 만약 계산 결과가 1.2 팔레트처럼 어중간하게 윗부분이 비어있는 상태로 나온다면, 시스템은 이를 <strong>2 파레트로 깔끔하게 무조건 올림</strong> 처리해 버립니다. </p>
+        </div>
+    </div>
+</div>
+
+
+
+</body></html>
