@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- saved from url=(0103)file:///Users/ebkim/.gemini/antigravity/brain/cc607076-d8e2-4153-8998-0ae08bb851f6/project_summary.html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>런드리고 발주 대시보드 개선 요약</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --border: #e8eaed;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+        }
+        .header p {
+            color: var(--text-sub);
+            font-size: 16px;
+            margin: 0;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .card h2 {
+            font-size: 18px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card ul {
+            margin: 0;
+            padding-left: 24px;
+            color: var(--text-sub);
+        }
+        .card li {
+            margin-bottom: 10px;
+        }
+        .card li:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>발주 대시보드 개선 요약</h1>
+            <p>데이터 기반 수요 예측 및 업무 자동화 시스템 구축 내역</p>
+        </div>
+
+        <div class="card">
+            <h2>📈 1. 수요 예측 및 발주 기준 자동화</h2>
+            <ul>
+                <li>최근 30일/60일/90일 평균 및 전년도 다음 달 데이터를 비교하여, 최대 소모량을 기준으로 발주 시점 수량을 자동 산출</li>
+                <li>예상 수요 대비 현재 소모량의 증감 추이를 분석하여 직관적인 시즌성 알림(예: 급증/급감 예상)을 제공</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🛡️ 2. 발주 수량 보정 및 안전장치</h2>
+            <ul>
+                <li>산출된 순수 부족 수량을 자재별 최소주문수량(MOQ) 및 포장 단위(PLT/Box) 배수에 맞추어 자동으로 올림 보정</li>
+                <li>담당자가 발주 수량을 수동으로 기입하는 경우에도, 지정된 물류 단위에 어긋나지 않도록 최종 수량을 자동 재보정하여 휴먼 에러를 방지</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>⏱️ 3. 발주 시뮬레이션</h2>
+            <ul>
+                <li>최종 확정 발주량을 기준으로 가용 재고의 사용 가능 일수를 실시간으로 산출하여 담당자의 의사결정을 지원</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>🚀 4. Apps Script 기반 외부 시트 연동 (PO List)</h2>
+            <ul>
+                <li>대시보드 내 체크박스 선택 후 버튼 클릭 시, 최종 발주 내역이 외부 'PO List' 스프레드시트로 자동 전송</li>
+                <li>데이터 전송 시 'PO List' 내 진짜 마지막 행을 자동으로 스캔하여 입력하며, 기존에 설정된 수식(자재명, 단가 등)이 손상되지 않도록 필수 데이터만 안전하게 기입</li>
+            </ul>
+        </div>
+
+        
+    </div>
+
+
+</body></html>
