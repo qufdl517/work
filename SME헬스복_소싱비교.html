@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>SME 헬스복 소싱 비교</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #f6f6f4;
+    --card: #ffffff;
+    --ink: #1c231f;
+    --ink-soft: #5c655f;
+    --line: #e1e1dd;
+    --line-soft: #eeeeea;
+    --pick-soft: #fff2d6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16181a;
+      --card: #1f2224;
+      --ink: #e9ebe8;
+      --ink-soft: #9aa39d;
+      --line: #33373a;
+      --line-soft: #292c2e;
+      --pick-soft: #3a3216;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16181a;
+    --card: #1f2224;
+    --ink: #e9ebe8;
+    --ink-soft: #9aa39d;
+    --line: #33373a;
+    --line-soft: #292c2e;
+    --pick-soft: #3a3216;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    line-height: 1.6;
+    padding-inline: 20px;
+  }
+  .wrap { max-width: 800px; margin: 0 auto; padding-block: 40px 90px; }
+  header.top { margin-bottom: 22px; }
+  header.top .eyebrow {
+    color: var(--ink-soft); font-weight: 700; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  header.top h1 {
+    margin: 6px 0 4px; font-size: 24px; font-weight: 700;
+    font-family: "Noto Serif KR", serif; text-wrap: balance; letter-spacing: -0.01em;
+  }
+  section {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 24px 24px 18px; margin-bottom: 20px;
+  }
+  section h2 {
+    font-family: "Noto Serif KR", serif; font-weight: 700; font-size: 16px;
+    margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+  }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 440px; }
+  th, td {
+    border: 1px solid var(--line); padding: 9px 11px; text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  th { background: var(--line-soft); font-weight: 700; color: var(--ink-soft); }
+  td:first-child, th:first-child { text-align: left; font-variant-numeric: normal; font-weight: 600; }
+  td.pick { background: var(--pick-soft); font-weight: 700; }
+  .note { font-size: 11.5px; color: var(--ink-soft); margin-top: 8px; }
+  footer { text-align: center; color: var(--ink-soft); font-size: 12px; margin-top: 8px; }
+  @media (max-width: 480px) {
+    section { padding: 18px 16px 14px; }
+    header.top h1 { font-size: 20px; }
+  }
+  @media print {
+    body { background: #fff; }
+    section { break-inside: avoid; page-break-inside: avoid; border: 1px solid #ccc; }
+    h2 { break-after: avoid; page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="eyebrow">구매전략팀</div>
+    <h1>SME 헬스복 대체 소싱 비교</h1>
+  </header>
+
+  <section>
+    <h2>한눈에 보는 비교 (1,000세트, 3XL 기준)</h2>
+    <div class="table-scroll">
+      <table>
+        <tr>
+          <th>구분</th>
+          <th>GBGH (참고)</th>
+          <th>현우물산</th>
+          <th>나라물산<br>(PK·메모리)</th>
+          <th>나라물산<br>(메쉬)</th>
+        </tr>
+        <tr>
+          <td>최종 예상 단가</td>
+          <td>-</td>
+          <td class="pick">10,600원</td>
+          <td>10,850원</td>
+          <td>9,550원</td>
+        </tr>
+        <tr>
+          <td>리드타임</td>
+          <td>3~4개월</td>
+          <td class="pick">7~10일 (재고)</td>
+          <td>기존 재고 있음<br>신규생산 병행 필요</td>
+          <td>신제품 재고는<br>10월 말 생산완료</td>
+        </tr>
+        <tr>
+          <td>즉시 재고 대응</td>
+          <td>-</td>
+          <td class="pick">가능</td>
+          <td>가능</td>
+          <td>불가 (신제품)</td>
+        </tr>
+        <tr>
+          <td>RFID 대응</td>
+          <td>-</td>
+          <td>+700원/세트<br>(+7~10일)</td>
+          <td>+600원/세트<br>(신규생산만 가능)</td>
+          <td>+600원/세트<br>(신규생산만 가능)</td>
+        </tr>
+      </table>
+    </div>
+    <div class="note">최종 예상 단가 = 원단 단가 + 인쇄비 + RFID 부착비 (VAT 별도). 굵게 표시한 항목이 현재 시점 권고안입니다.</div>
+  </section>
+
+  <section>
+    <h2>수량별 단가 상세 (3XL, 인쇄 제외, VAT 별도)</h2>
+    <div class="table-scroll">
+      <table>
+        <tr><th>수량</th><th>현우물산</th><th>나라물산 (PK·메모리)</th><th>나라물산 (메쉬)</th></tr>
+        <tr><td>1,000세트</td><td>8,900원</td><td>9,400원</td><td>8,100원</td></tr>
+        <tr><td>3,000세트</td><td>8,500원</td><td>9,000원</td><td>7,800원</td></tr>
+        <tr><td>5,000세트</td><td>8,000원</td><td>8,600원</td><td>7,500원</td></tr>
+      </table>
+    </div>
+    <div class="note">GBGH는 대량(1만세트 이상) 기준 단가 체계라 이번 물량 규모와는 직접 비교가 어려워 제외했습니다.</div>
+  </section>
+
+  <section>
+    <h2>3XL 치수 — 상의 (cm)</h2>
+    <div class="table-scroll">
+      <table>
+        <tr><th>항목</th><th>GBGH</th><th>현우물산 (K-001)</th><th>나라물산 (쿨론PK)</th></tr>
+        <tr><td>가슴둘레</td><td>127</td><td>120</td><td>118</td></tr>
+        <tr><td>총기장</td><td>73.5</td><td>79</td><td>75.5</td></tr>
+        <tr><td>어깨너비</td><td>55</td><td>50</td><td>49.5</td></tr>
+        <tr><td>소매기장</td><td>25.5</td><td>23</td><td>23</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>3XL 치수 — 하의 (cm)</h2>
+    <div class="table-scroll">
+      <table>
+        <tr><th>항목</th><th>GBGH</th><th>현우물산</th><th>나라물산</th></tr>
+        <tr><td>허리둘레</td><td>93<br>(스트링 있는 기준)</td><td>78</td><td>77</td></tr>
+        <tr><td>힙둘레</td><td>133</td><td>132</td><td>자료없음</td></tr>
+        <tr><td>허벅지둘레</td><td>81.5</td><td>80</td><td>자료없음</td></tr>
+        <tr><td>총기장/아웃심</td><td>50.5</td><td>50</td><td>55.5</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <footer>의식주컴퍼니 구매전략팀 내부 자료</footer>
+</div>
+</body>
+</html>
